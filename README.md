@@ -67,3 +67,6 @@ Maincraft server with forge & mods.
 * Forge: 1.15.2-31.1.1
 * Mods:
   * Luckblock-1.15.2.-1.jar
+
+### License
+MIT License
