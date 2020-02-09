@@ -1,0 +1,92 @@
+version: '3.5'
+
+#================================================================================================
+# NETWORK SETUP
+#================================================================================================
+networks:
+  minecraft-net:
+    name: ${NETWORKS_NAME:-minecraft-net}
+    driver: ${NETWORKS_DRIVER:-bridge}
+    ipam:
+      config:
+        - subnet: 172.130.130.0/16
+
+#================================================================================================
+# VOLUME SETUP
+#================================================================================================
+volumes:
+  portainer:
+    driver: ${VOLUMES_DRIVER:-local}
+  minecraft-creative:
+    driver: ${VOLUMES_DRIVER:-local}
+  minecraft-survival:
+    driver: ${VOLUMES_DRIVER:-local}
+
+services:
+#================================================================================================
+# PORTAINER
+#================================================================================================
+  portainer:
+    image: zerolabssyseng/portainer:latest
+    container_name: ${CONTAINER_PORTAINER:-minecraft_portainer}
+    ports:
+      - "${PORT_PORTAINER:-5212}:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${DATA_PORTAINER:-/data/portainer}:/data
+    environment:
+      - PORTAINER_TEMPLATE=generic
+      - PORTAINER_VERSION=${PORTAINER_VERSION:-1.22.0}
+    privileged: true
+    networks:
+      minecraft-net:
+        ipv4_address: ${CONTAINER_IP_PORTAINER:-172.130.130.5}
+
+#================================================================================================
+# MINECRAFT-CREATIVE
+#================================================================================================
+  minecraft-creative:
+    # image: kitematic/minecraft:latest
+    restart: always
+    build:
+      context: minecraft/.
+    container_name: ${CONTAINER_MINECRAFT_CREATIVE:-minecraft_creative}
+    ports:
+      - "${PORT_MINECRAFT_CREATIVE:-25515}:25565"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${DATA_MINECRAFT_CREATIVE:-/data/minecraft/creative}:/data
+      - ${CONFIG_MINECRAFT_CREATIVE:-/data/minecraft/creative/server-creative.properties}:/data/server.properties
+      - ${MINECRAFT_SERVER:-/data/minecraft/creative/server.jar}:/data/minecraft_server.${MINECRAFT_VERSION}.jar
+    environment:
+      - TZ="Asia/Jakarta"
+      - MINECRAFT_VERSION=${MINECRAFT_VERSION}
+    privileged: true
+    networks:
+      minecraft-net:
+        ipv4_address: ${CONTAINER_IP_MINECRAFT_CREATIVE:-172.130.130.6}
+
+
+#================================================================================================
+# MINECRAFT-SURVIVAL
+#================================================================================================
+  minecraft-survival:
+    # image: kitematic/minecraft:latest
+    restart: always
+    build:
+      context: minecraft/.
+    container_name: ${CONTAINER_MINECRAFT_SURVIVAL:-minecraft_survival}
+    ports:
+      - "${PORT_MINECRAFT_SURVIVAL:-25525}:25565"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${DATA_MINECRAFT_SURVIVAL:-/data/minecraft/survival}:/data
+      - ${CONFIG_MINECRAFT_SURVIVAL:-/data/minecraft/survival/server-survival.properties}:/data/server.properties
+      - ${MINECRAFT_SERVER:-/data/minecraft/survival/server.jar}:/data/minecraft_server.${MINECRAFT_VERSION}.jar
+    environment:
+      - TZ="Asia/Jakarta"
+      - MINECRAFT_VERSION=${MINECRAFT_VERSION}
+    privileged: true
+    networks:
+      minecraft-net:
+        ipv4_address: ${CONTAINER_IP_MINECRAFT_SURVIVAL:-172.130.130.7}
