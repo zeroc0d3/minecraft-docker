@@ -75,10 +75,10 @@ Maincraft server with forge & mods.
   ```
 
 ### Version
-* Server: 1.15.2
-* Forge: 1.15.2-31.1.1
+* Server: `minecraft_server.1.15.2.jar`
+* Forge: `forge-1.15.2-31.1.1.jar`
 * Mods:
-  * Luckblock-1.15.2.-1.jar
+  * `luckyblock-1.15.2-1.jar`
 
 ### License
 MIT License
