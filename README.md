@@ -50,7 +50,14 @@ Maincraft server with forge & mods.
     - rcon.port=25525
     - server-port=25525
     - server-ip=172.130.130.7
+
+  * server-forge.properties
+    - query.port=25535
+    - rcon.port=25535
+    - server-port=25535
+    - server-ip=172.130.130.8
   ```
+
 * Add Operator (Cheat Mode) User
   * ops.json
     ```
