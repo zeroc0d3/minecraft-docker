@@ -12,7 +12,7 @@ Maincraft server with forge & mods.
   bash run-docker.sh
   ```
 
-### Play Multiplayer
+### Running Multiplayer
 * Add Creative Server
   ```
   Server Name: Docker Creative
@@ -22,6 +22,11 @@ Maincraft server with forge & mods.
   ```
   Server Name: Docker Survival
   Server Address: 172.130.130.7:25525
+  ```
+* Add Forge Server
+  ```
+  Server Name: Docker Forge (Survival)
+  Server Address: 172.130.130.8:25535
   ```
 
 ### Advanced Configuration
