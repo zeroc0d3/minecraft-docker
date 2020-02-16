@@ -1,13 +1,23 @@
 ARG MINECRAFT_VERSION=1.15.2
-FROM kitematic/minecraft:latest
+ARG MINECRAFT_FORGE_VERSION=31.1.12
+
+FROM openjdk:8u171-jdk-stretch
 
 MAINTAINER "ZeroC0D3 <zeroc0d3.team@gmail.com>"
 
 ENV MINECRAFT_VERSION=${MINECRAFT_VERSION}
+ENV MINECRAFT_FORGE_VERSION=${MINECRAFT_FORGE_VERSION}
+ENV CMD_SERVER_MINECRAFT=/data/minecraft/minecraft_server.${MINECRAFT_VERSION}.jar
+ENV CMD_SERVER_FORGE=/data/minecraft/forge-${MINECRAFT_VERSION}-${MINECRAFT_FORGE_VERSION}-launcher.jar
+ENV CMD_SERVER=${CMD_SERVER_MINECRAFT}
 
 COPY rootfs/ /
-WORKDIR /data
+COPY docker-entrypoint.sh /
+
+WORKDIR /data/minecraft
 VOLUME [/data]
 EXPOSE 25565/tcp
 
-CMD ["/bin/sh","-c","echo eula=true > /data/eula.txt && java -jar /data/minecraft_server.${MINECRAFT_VERSION}.jar"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD ["java", "-Xmx1024M", "-Xms1024M", "-jar", ${CMD_SERVER}, "nogui"]
