@@ -76,7 +76,7 @@ Maincraft server with forge & mods.
 
 ### Version
 * Server: `minecraft_server.1.15.2.jar`
-* Forge: `forge-1.15.2-31.1.1.jar`
+* Forge: `forge-1.15.2-31.1.12.jar`
 * Mods:
   * `luckyblock-1.15.2-1.jar`
 
