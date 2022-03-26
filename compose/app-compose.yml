@@ -114,7 +114,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro            ## Do not use it in mac
       - /var/run/docker.sock:/var/run/docker.sock   ## Do not use it in k8s
-      - vol_minecraft_creative:/data/minecraft
+      - vol_minecraft_forge:/data/minecraft
       - /opt/data/docker/minecraft/forge/server-forge.properties:/data/minecraft/server.properties
     environment:
       - TZ="Asia/Jakarta"
@@ -149,7 +149,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro            ## Do not use it in mac
       - /var/run/docker.sock:/var/run/docker.sock   ## Do not use it in k8s
-      - vol_minecraft_creative:/data/minecraft
+      - vol_minecraft_survival:/data/minecraft
       - /opt/data/docker/minecraft/survival/server-survival.properties:/data/minecraft/server.properties
     environment:
       - TZ="Asia/Jakarta"
