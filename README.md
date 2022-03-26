@@ -16,17 +16,17 @@ Maincraft server with forge & mods.
 * Add Creative Server
   ```
   Server Name: Docker Creative
-  Server Address: 172.130.130.6:25515
+  Server Address: 172.145.145.6:25565
   ```
 * Add Survival Server
   ```
   Server Name: Docker Survival
-  Server Address: 172.130.130.7:25525
+  Server Address: 172.145.145.7:25525
   ```
 * Add Forge Server
   ```
   Server Name: Docker Forge (Survival)
-  Server Address: 172.130.130.8:25535
+  Server Address: 172.145.145.8:25535
   ```
 
 ### Advanced Configuration
@@ -34,30 +34,30 @@ Maincraft server with forge & mods.
   ```
   default:
   * .env
-    - CONTAINER_IP_MINECRAFT_CREATIVE=172.130.130.6
-    - CONTAINER_IP_MINECRAFT_SURVIVAL=172.130.130.7
-    - CONTAINER_IP_MINECRAFT_FORGE=172.130.130.8
-    - PORT_MINECRAFT_CREATIVE=25515
+    - CONTAINER_IP_MINECRAFT_CREATIVE=172.145.145.6
+    - CONTAINER_IP_MINECRAFT_SURVIVAL=172.145.145.7
+    - CONTAINER_IP_MINECRAFT_FORGE=172.145.145.8
+    - PORT_MINECRAFT_CREATIVE=25565
     - PORT_MINECRAFT_SURVIVAL=25525
     - PORT_MINECRAFT_FORGE=25535
 
   * server-creative.properties
-    - query.port=25515
-    - rcon.port=25515
-    - server-port=25515
-    - server-ip=172.130.130.6
+    - query.port=25565
+    - rcon.port=25565
+    - server-port=25565
+    - server-ip=172.145.145.6
 
   * server-survival.properties
     - query.port=25525
     - rcon.port=25525
     - server-port=25525
-    - server-ip=172.130.130.7
+    - server-ip=172.145.145.7
 
   * server-forge.properties
     - query.port=25535
     - rcon.port=25535
     - server-port=25535
-    - server-ip=172.130.130.8
+    - server-ip=172.145.145.8
   ```
 
 * Add Operator (Cheat Mode) User
