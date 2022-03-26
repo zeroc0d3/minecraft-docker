@@ -4,11 +4,11 @@ Maincraft server with forge & mods.
 
 ### How-to-run
 
-* Install Docker
-* Install Docker-Compose
-* Copy inside folder `data` to your binding container volume (eg: `/data`)
-* Copy `.env.example` to `.env`
-* Run:
+- Install Docker
+- Install Docker-Compose
+- Copy inside folder `data` to your binding container volume (eg: `/data`)
+- Copy `.env.example` to `.env`
+- Run:
 
   ```
   ./run-docker.sh
@@ -16,21 +16,21 @@ Maincraft server with forge & mods.
 
 ### Running Multiplayer
 
-* Add Creative Server
+- Add Creative Server
 
   ```
   Server Name: Docker Creative
   Server Address: 172.145.145.6:25566
   ```
 
-* Add Forge Server
+- Add Forge Server
 
   ```
   Server Name: Docker Forge (Survival)
   Server Address: 172.145.145.7:25567
   ```
 
-* Add Survival Server
+- Add Survival Server
 
   ```
   Server Name: Docker Survival
@@ -39,11 +39,11 @@ Maincraft server with forge & mods.
 
 ### Advanced Configuration
 
-* Change IP Address Server & Port
+- Change IP Address Server & Port
 
   ```
   default:
-  * .env
+  - .env
     - CONTAINER_IP_MINECRAFT_CREATIVE=172.145.145.6
     - CONTAINER_IP_MINECRAFT_FORGE=172.145.145.7
     - CONTAINER_IP_MINECRAFT_SURVIVAL=172.145.145.8
@@ -51,27 +51,27 @@ Maincraft server with forge & mods.
     - PORT_MINECRAFT_FORGE=25567
     - PORT_MINECRAFT_SURVIVAL=25568
 
-  * server-creative.properties
+  - server-creative.properties
     - query.port=25566
     - rcon.port=25566
     - server-port=25566
     - server-ip=172.145.145.6
 
-  * server-forge.properties
+  - server-forge.properties
     - query.port=25567
     - rcon.port=25567
     - server-port=25567
     - server-ip=172.145.145.7
 
-  * server-survival.properties
+  - server-survival.properties
     - query.port=25568
     - rcon.port=25568
     - server-port=25568
     - server-ip=172.145.145.8
   ```
 
-* Add Operator (Cheat Mode) User
-  * ops.json
+- Add Operator (Cheat Mode) User
+  - ops.json
 
     ```
     [
@@ -86,7 +86,7 @@ Maincraft server with forge & mods.
 
 ### Environment Test
 
-* Docker Version
+- Docker Version
 
   ```
   docker -v
@@ -94,7 +94,7 @@ Maincraft server with forge & mods.
   Docker version 19.03.5, build 633a0ea838
   ```
 
-* Docker-Compose Version
+- Docker-Compose Version
 
   ```
   docker-compose -v
@@ -104,10 +104,10 @@ Maincraft server with forge & mods.
 
 ### Version
 
-* Server: `minecraft_server.1.18.2.jar`
-* Forge: `forge-1.18.2-40.0.32.jar`
-* Mods:
-  * `lucky-block-forge-1.18.2-12.0.jar`
+- Server: `minecraft_server.1.18.2.jar`
+- Forge: `forge-1.18.2-40.0.32.jar`
+- Mods:
+  - `lucky-block-forge-1.18.2-12.0.jar`
 
 ### License
 

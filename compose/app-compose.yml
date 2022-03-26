@@ -29,12 +29,18 @@ volumes:
       o: bind
       type: none
       device: ${DATA_MINECRAFT_CREATIVE:-/opt/data/docker/minecraft/creative}
-  vol_minecraft_server_properties:
+  vol_minecraft_forge:
     <<: *volume_default
     driver_opts:
       o: bind
       type: none
-      device: ${DATA_MINECRAFT_CREATIVE_PROPERTIES:-/opt/data/docker/minecraft/creative/server-creative.properties}
+      device: ${DATA_MINECRAFT_CREATIVE:-/opt/data/docker/minecraft/forge}
+  vol_minecraft_survival:
+    <<: *volume_default
+    driver_opts:
+      o: bind
+      type: none
+      device: ${DATA_MINECRAFT_CREATIVE:-/opt/data/docker/minecraft/survival}
 
 services:
 #================================================================================================
