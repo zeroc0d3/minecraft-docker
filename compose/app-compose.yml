@@ -29,18 +29,12 @@ volumes:
       o: bind
       type: none
       device: ${DATA_MINECRAFT_CREATIVE:-/opt/data/docker/minecraft/creative}
-  vol_minecraft_survival:
+  vol_minecraft_server_properties:
     <<: *volume_default
     driver_opts:
       o: bind
       type: none
-      device: ${DATA_MINECRAFT_CREATIVE:-/opt/data/docker/minecraft/survival}
-  vol_minecraft_forge:
-    <<: *volume_default
-    driver_opts:
-      o: bind
-      type: none
-      device: ${DATA_MINECRAFT_CREATIVE:-/opt/data/docker/minecraft/forge}
+      device: ${DATA_MINECRAFT_CREATIVE_PROPERTIES:-/opt/data/docker/minecraft/creative/server-creative.properties}
 
 services:
 #================================================================================================
@@ -75,7 +69,7 @@ services:
       dockerfile: Dockerfile
     container_name: ${CONTAINER_MINECRAFT_CREATIVE:-minecraft_creative}
     ports:
-      - "${PORT_MINECRAFT_CREATIVE:-25565}:25565"
+      - "${PORT_MINECRAFT_CREATIVE:-25566}:25566"
     volumes:
       - /etc/localtime:/etc/localtime:ro            ## Do not use it in mac
       - /var/run/docker.sock:/var/run/docker.sock   ## Do not use it in k8s
@@ -98,3 +92,73 @@ services:
     networks:
       devopscorner_net:
         ipv4_address: ${CONTAINER_IP_MINECRAFT_CREATIVE:-172.145.145.6}
+
+#================================================================================================
+# MINECRAFT-FORGE
+#================================================================================================
+  minecraft-forge:
+    # image: zeroc0d3lab/minecraft-docker:${MINECRAFT_VERSION:-1.15.2}
+    restart: always
+    build:
+      context: minecraft/
+      dockerfile: Dockerfile
+    container_name: ${CONTAINER_MINECRAFT_SURVIVAL:-minecraft_forge}
+    ports:
+      - "${PORT_MINECRAFT_CREATIVE:-25567}:25567"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro            ## Do not use it in mac
+      - /var/run/docker.sock:/var/run/docker.sock   ## Do not use it in k8s
+      - vol_minecraft_creative:/data/minecraft
+      - /opt/data/docker/minecraft/forge/server-forge.properties:/data/minecraft/server.properties
+    environment:
+      - TZ="Asia/Jakarta"
+      - MINECRAFT_VERSION=${MINECRAFT_VERSION:-1.18.2}
+      - MINECRAFT_FORGE_VERSION=${MINECRAFT_FORGE_VERSION:-40.0.32}
+      - CMD_SERVER_MINECRAFT=/data/minecraft/minecraft_server.${MINECRAFT_VERSION:-1.18.2}.jar
+      - CMD_SERVER_FORGE=/data/minecraft/forge-${MINECRAFT_VERSION:-1.18.2}-${MINECRAFT_FORGE_VERSION:-40.0.32}-launcher.jar
+    entrypoint:
+      - "java"
+      - "-Xmx1024M"
+      - "-Xms1024M"
+      - "-jar"
+      - /data/minecraft/minecraft_server.${MINECRAFT_VERSION:-1.18.2}.jar
+      - "nogui"
+    privileged: true
+    networks:
+      devopscorner_net:
+        ipv4_address: ${CONTAINER_IP_MINECRAFT_SURVIVAL:-172.145.145.7}
+
+#================================================================================================
+# MINECRAFT-SURVIVAL
+#================================================================================================
+  minecraft-survival:
+    # image: zeroc0d3lab/minecraft-docker:${MINECRAFT_VERSION:-1.15.2}
+    restart: always
+    build:
+      context: minecraft/
+      dockerfile: Dockerfile
+    container_name: ${CONTAINER_MINECRAFT_SURVIVAL:-minecraft_survival}
+    ports:
+      - "${PORT_MINECRAFT_CREATIVE:-25568}:25568"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro            ## Do not use it in mac
+      - /var/run/docker.sock:/var/run/docker.sock   ## Do not use it in k8s
+      - vol_minecraft_creative:/data/minecraft
+      - /opt/data/docker/minecraft/survival/server-survival.properties:/data/minecraft/server.properties
+    environment:
+      - TZ="Asia/Jakarta"
+      - MINECRAFT_VERSION=${MINECRAFT_VERSION:-1.18.2}
+      - MINECRAFT_FORGE_VERSION=${MINECRAFT_FORGE_VERSION:-40.0.32}
+      - CMD_SERVER_MINECRAFT=/data/minecraft/minecraft_server.${MINECRAFT_VERSION:-1.18.2}.jar
+      - CMD_SERVER_FORGE=/data/minecraft/forge-${MINECRAFT_VERSION:-1.18.2}-${MINECRAFT_FORGE_VERSION:-40.0.32}-launcher.jar
+    entrypoint:
+      - "java"
+      - "-Xmx1024M"
+      - "-Xms1024M"
+      - "-jar"
+      - /data/minecraft/minecraft_server.${MINECRAFT_VERSION:-1.18.2}.jar
+      - "nogui"
+    privileged: true
+    networks:
+      devopscorner_net:
+        ipv4_address: ${CONTAINER_IP_MINECRAFT_SURVIVAL:-172.145.145.8}

@@ -53,7 +53,7 @@ services:
         ipv4_address: ${CONTAINER_IP_PORTAINER:-172.145.145.5}
 
 #================================================================================================
-# MINECRAFT-SURVIVAL
+# MINECRAFT-FORGE
 #================================================================================================
   minecraft-forge:
     # image: zeroc0d3lab/minecraft-docker:${MINECRAFT_VERSION:-1.15.2}
@@ -63,7 +63,7 @@ services:
       dockerfile: Dockerfile
     container_name: ${CONTAINER_MINECRAFT_SURVIVAL:-minecraft_forge}
     ports:
-      - "${PORT_MINECRAFT_CREATIVE:-25565}:25565"
+      - "${PORT_MINECRAFT_CREATIVE:-25567}:25567"
     volumes:
       - /etc/localtime:/etc/localtime:ro            ## Do not use it in mac
       - /var/run/docker.sock:/var/run/docker.sock   ## Do not use it in k8s

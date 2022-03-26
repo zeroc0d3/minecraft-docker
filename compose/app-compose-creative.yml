@@ -69,7 +69,7 @@ services:
       dockerfile: Dockerfile
     container_name: ${CONTAINER_MINECRAFT_CREATIVE:-minecraft_creative}
     ports:
-      - "${PORT_MINECRAFT_CREATIVE:-25565}:25565"
+      - "${PORT_MINECRAFT_CREATIVE:-25566}:25566"
     volumes:
       - /etc/localtime:/etc/localtime:ro            ## Do not use it in mac
       - /var/run/docker.sock:/var/run/docker.sock   ## Do not use it in k8s
